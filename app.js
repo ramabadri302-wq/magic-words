@@ -89,12 +89,32 @@
     poemEl.textContent = poems[i];
     card.hidden = true; win.hidden = false;
     confetti();
+    startAutoReset();
   });
+  var RESET_SECS = 15, resetTimer = null, tickTimer = null;
+  function stopAutoReset() { clearTimeout(resetTimer); clearInterval(tickTimer); resetTimer = tickTimer = null; }
+  function startAutoReset() {
+    stopAutoReset();
+    var left = RESET_SECS, el = $('auto');
+    el.textContent = 'Back to the start in ' + left + 's…';
+    tickTimer = setInterval(function () { left--; if (left > 0) el.textContent = 'Back to the start in ' + left + 's…'; }, 1000);
+    resetTimer = setTimeout(resetGame, RESET_SECS * 1000);
+  }
+  function resetGame() {
+    stopAutoReset();
+    win.hidden = true; card.hidden = false;
+    inp.value = ''; msg.textContent = ''; tries = 0;
+    updateCount();
+    card.classList.remove('pop'); void card.offsetWidth; card.classList.add('pop');
+    inp.focus();
+  }
+  $('reset').addEventListener('click', resetGame);
   $('again').addEventListener('click', function () {
     var i; do { i = Math.floor(Math.random() * poems.length); } while (poems.length > 1 && i === lastPoem);
     lastPoem = i; poemEl.textContent = poems[i];
     poemEl.classList.remove('pop'); void poemEl.offsetWidth; poemEl.classList.add('pop');
     confetti();
+    startAutoReset();
   });
   function say(t) { msg.textContent = t; msg.classList.remove('pop'); void msg.offsetWidth; msg.classList.add('pop'); }
   function confetti() {
