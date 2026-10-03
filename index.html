@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Say the Magic Words ✨</title>
+<meta name="description" content="Can you guess the secret compliment? Three words. Unlimited tries.">
+<meta name="theme-color" content="#7b2ff7">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Say the Magic Words ✨">
+<meta property="og:description" content="Can you guess the secret compliment? Three words. Unlimited tries.">
+<meta property="og:url" content="https://ramabadri302-wq.github.io/magic-words/">
+<meta property="og:image" content="https://ramabadri302-wq.github.io/magic-words/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Say the Magic Words ✨">
+<meta name="twitter:image" content="https://ramabadri302-wq.github.io/magic-words/og.png">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✨</text></svg>">
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;
+ background:linear-gradient(135deg,#7b2ff7 0%,#f107a3 55%,#ff9a3c 100%);background-attachment:fixed;color:#2b2140}
+.c{width:100%;max-width:440px;background:#fff;border-radius:28px;padding:30px 24px 26px;box-shadow:0 20px 60px rgba(40,0,80,.35);text-align:center}
+h1{margin:6px 0 8px;font-size:1.9rem;line-height:1.15;background:linear-gradient(90deg,#7b2ff7,#f107a3);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin:0 0 6px;color:#5d5375;font-size:1.02rem}
+.rule{display:inline-block;margin:8px 0 18px;padding:6px 14px;border-radius:999px;background:#fff3c4;color:#8a5a00;font-weight:700;font-size:.95rem}
+.big{font-size:3rem;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-8px) rotate(-6deg)}}
+input{width:100%;font-size:1.2rem;padding:15px 16px;border:3px solid #e6dcff;border-radius:16px;outline:none;transition:.2s;font-family:inherit}
+input:focus{border-color:#7b2ff7;box-shadow:0 0 0 5px rgba(123,47,247,.15)}
+.cnt{text-align:right;font-size:.9rem;color:#8b80a3;margin:6px 4px 14px;font-variant-numeric:tabular-nums}
+.cnt.full{color:#f107a3;font-weight:700}
+.cnt.bump{animation:bump .35s}
+@keyframes bump{40%{transform:scale(1.25)}}
+button{width:100%;font-size:1.15rem;font-weight:800;color:#fff;border:0;border-radius:16px;padding:15px;cursor:pointer;
+ background:linear-gradient(90deg,#7b2ff7,#f107a3);box-shadow:0 8px 20px rgba(241,7,163,.35);transition:transform .1s}
+button:active{transform:scale(.97)}
+.msg{min-height:1.6em;margin:16px 0 0;font-weight:600;color:#7b2ff7}
+.pop{animation:pop .35s}
+@keyframes pop{0%{transform:scale(.8);opacity:0}100%{transform:scale(1);opacity:1}}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
+.poem{white-space:pre-line;text-align:left;font-size:1.08rem;line-height:1.55;background:#faf6ff;border-left:5px solid #f107a3;padding:16px 18px;border-radius:14px;margin:16px 0 20px}
+.win h1{font-size:2.1rem}
+canvas{position:fixed;inset:0;pointer-events:none;z-index:9}
+.foot{margin-top:14px;font-size:.8rem;color:#a99fbf}
+</style>
+</head>
+<body>
+<canvas id="fx"></canvas>
+<main class="c" id="card">
+  <div class="big">🔮</div>
+  <h1>Say the Magic Words</h1>
+  <p class="sub">There's a secret compliment that unlocks a surprise.<br>Can you figure it out?</p>
+  <div class="rule">✋ 3 words max</div>
+  <form id="f" autocomplete="off">
+    <input id="q" type="text" placeholder="Type the magic words…" aria-label="Your guess" autocapitalize="off" spellcheck="false" maxlength="60">
+    <div class="cnt" id="cnt">0 / 3 words</div>
+    <button type="submit">Reveal ✨</button>
+  </form>
+  <p class="msg" id="msg" aria-live="polite"></p>
+  <p class="foot">Unlimited tries. No pressure. 😉</p>
+</main>
+<main class="c win" id="win" hidden>
+  <div class="big">🎉</div>
+  <h1>YOU GOT IT!</h1>
+  <p class="sub">Correct! Here's a poem in your honour:</p>
+  <div class="poem pop" id="poem"></div>
+  <button id="again" type="button">Another poem! 🎊</button>
+</main>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
